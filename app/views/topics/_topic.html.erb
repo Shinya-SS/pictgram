@@ -1,0 +1,9 @@
+            <% if topic.already_favorite?(current_user) %>
+              <%= link_to(topic_add_path(topic), remote: true, method: :delete, id: :"favorite-button-#{topic.id}") do %>
+                <%= image_tag 'icons/heart-black.png', class: 'topic-index-icon2' %>
+              <% end %>
+            <% else %>
+              <%= link_to(topic_add_path(topic), remote: true, method: :post, id: :"favorite-button-#{topic.id}") do %>
+                <%= image_tag 'icons/heart-black.png', class: 'topic-index-icon' %>
+              <% end %>
+            <% end %>

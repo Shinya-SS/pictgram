@@ -1,0 +1,1 @@
+$('#favorite-button-<%= @topic.id %>').html("<%= escape_javascript(render partial: "topics/topic", locals: { topic: @topic }) %>");

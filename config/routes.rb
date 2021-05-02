@@ -7,10 +7,17 @@ Rails.application.routes.draw do
   get 'pages/link'
   
   resources :users
-  resources :topics
+  resources :topics do
+    post 'add' => 'favorites#create'
+    delete '/add' => 'favorites#delete'
+  end
   
   get '/login',     to: 'sessions#new'
   post '/login',    to: 'sessions#create'
   delete '/logout', to: 'sessions#destory'
+  
+  get 'favorites/index'
+  post '/favorites', to: 'favorites#create' 
+  post '/favorites/delete', to: 'favorites#delete'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
