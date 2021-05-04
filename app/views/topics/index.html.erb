@@ -10,12 +10,30 @@
             <%= image_tag topic.image.url %>
             <div id="favorite-button-<%= topic.id %>">
               <%= render 'topics/topic', topic: topic %>
-              <div class="favorite-count"><%= Favorite.where(topic_id: topic.id).count %></div>
-              <%= image_tag 'icons/comment.png', class: 'topic-index-icon' %>
-              <p class="topic-text">
+              <%= link_to comment_show_path(topic_id: topic.id) do %>
+                <%= image_tag 'icons/comment.png', class: 'topic-index-icon' %>
+              <% end %>
             </div>
+            <p class="topic-text">
               <%= topic.description %>
             </p>
+            <div class="comment-text-input">
+              <%= form_for @comment, url: comments_path do |f| %>
+                <div class="form-group">
+                  <%= f.label :comment, class: 'text-black' %>
+                  <%= f.text_field :comment, class: 'form-control' %>
+                  <%= f.hidden_field :topic_id, value: topic.id %>
+                </div>
+                <%= f.submit "投稿", class: 'btn-comment' %>
+              <% end %>
+            </div>
+            <div class="comment-text">
+              <% topic.comments.each do |comment| %>
+              <p class="topic-text">
+                <%= comment.comment %>
+              </p>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
