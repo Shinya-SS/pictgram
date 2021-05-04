@@ -48,14 +48,14 @@ class FavoritesController < ApplicationController
   
   private
   
-  # def set_favorite
-  #   @topic = Topic.find(params[:topic_id])
-  # end
   def set_favorite
-    if params[:topic_id] != nil
-      @topic = Topic.find(params[:topic_id])
-    else
-      @topic = nil
-    end
+    @topic = Topic.find(params[:topic_id])
   end
+  # def set_favorite
+  #   if params[:topic_id] != nil
+  #     @topic = Topic.find(params[:topic_id])
+  #   else
+  #     @topic = nil
+  #   end
+  # end
 end

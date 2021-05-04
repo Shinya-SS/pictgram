@@ -1,0 +1,13 @@
+            <% if topic.already_favorite?(current_user) %>
+              <%= link_to(topic_add_path(topic), method: :delete, remote: true, id: :"favorite-button-#{topic.id}") do %>
+                <%= image_tag 'icons/heart-black.png', class: 'topic-index-icon2' %>
+              <% end %>
+            <% else %>
+              <%= link_to(topic_add_path(topic), method: :post, remote: true, id: :"favorite-button-#{topic.id}") do %>
+                <%= image_tag 'icons/heart-black.png', class: 'topic-index-icon' %>
+              <% end %>
+            <% end %>
+               <div class="favorite-count"><%= Favorite.where(topic_id: topic.id).count %></div>
+            <%= link_to comment_show_path(topic_id: topic.id) do %>
+              <%= image_tag 'icons/comment.png', class: 'topic-index-icon' %>
+            <% end %>
