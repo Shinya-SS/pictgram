@@ -1,7 +1,9 @@
 class TopicsController < ApplicationController
   
+  before_action :set_topics, only: [:index]
+  before_action :login_chk, only: [:new]
+  
   def index
-    @topics = Topic.all.includes(:favorite_users)
     @comment = Comment.new
     # binding.pry
   end
@@ -24,5 +26,15 @@ class TopicsController < ApplicationController
   private
   def topic_params
     params.require(:topic).permit(:image, :description)
+  end
+  
+  def set_topics
+    @topics = Topic.all.includes(:favorite_users)
+  end
+  
+  def login_chk
+    unless logged_in?
+      redirect_to login_path, danger: 'ログインされていません'
+    end
   end
 end
