@@ -22,6 +22,9 @@
         <% end %>
         <ul class="nav navbar-nav navbar-right">
           <% if logged_in? %>
+            <li class="logged-in-name">
+              <%= current_user.name %>さん
+            </li>
             <li>
               <%= link_to topics_path do %>
                 <%= image_tag "icons/list.png" %>

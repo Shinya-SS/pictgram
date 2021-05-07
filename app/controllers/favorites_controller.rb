@@ -1,6 +1,6 @@
 class FavoritesController < ApplicationController
   
-  before_action :set_favorite
+  before_action :set_favorite, only: [:create, :delete]
   
   def index
     @favorite_topics = current_user.favorite_topics

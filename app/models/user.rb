@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  
+  before_validation :name_chk
+  
   #name 空白NG １５文字以内
   validates :name, presence: true, length: {maximum: 15}
   #「~ @ ~ . ~」の形式のみ許可
@@ -16,4 +19,9 @@ class User < ApplicationRecord
   has_many :favorites
   has_many :favorite_topics, through: :favorites, source: 'topic'
   has_many :comments
+  
+  private
+  def name_chk
+    self.name = "名無しさん" if self.name.blank?
+  end
 end
